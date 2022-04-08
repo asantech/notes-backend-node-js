@@ -46,7 +46,7 @@ let backendMode;
                 'Access-Control-Allow-Headers',
                 'Origin, X-Requested-With, Content-type, Accept, Authorization'
             );
-            res.setHeader('Access-Control-Allow-Methods','PATCH','POST','GET','DELETE');
+            res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, DELETE');
             next();
         });
 

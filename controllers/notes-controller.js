@@ -60,13 +60,15 @@ const updateNote = (req,res,next)=>{
     res.status(200).json(updateNote);
 }
 
-const delNote = (req,res,next)=>{
+const delNote = async (req,res,next)=>{
 
-    const noteId = req.params.id;
+    const noteId = req.params.noteId;
 
-    DUMMY_NOTES = DUMMY_NOTES.filter(note => note.id !== noteId);
+    await Note.deleteOne({ _id: noteId });
+
+    const notes = await Note.find().exec();
  
-    res.status(200).json(DUMMY_NOTES);
+    res.json(notes);
 }
 
 exports.createNote = createNote;
