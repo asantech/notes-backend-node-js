@@ -7,6 +7,10 @@ const noteSchema = new mongoose.Schema({
         required: true,
     },
     type: {}, // علت بررسی شود
+    scopeId: {
+        type: String,
+        required: true,
+    },
     createdDate: {},
     lastModificationDate: {},
     srcTypeId: {

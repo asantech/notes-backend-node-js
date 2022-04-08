@@ -1,8 +1,6 @@
 const HttpErr = require('../models/http-err');
 const Note = require('../models/note');
 
-let DUMMY_NOTES = [];
-
 const createNote = async (req,res,next)=>{
     const {scopeId,title,type,srcTypeId,srcName,srcURL,note} = req.body;
 
@@ -29,35 +27,48 @@ const getNotes = async (req,res,next)=>{
     res.json(notes);
 }
 
-const updateNote = (req,res,next)=>{
+const updateNote = async (req,res,next)=>{
     const {title,type,srcTypeId,srcName,srcURL,note} = req.body;
-    const noteId = req.params.id;
+    const noteId = req.body._id;
 
-    const updateNote = { ...DUMMY_NOTES.find(note => note.id === noteId)};
-    const scopeIndex = DUMMY_NOTES.findIndex(note => note.id === noteId);
-    
-    if(scopeIndex == -1)
-        return next(new HttpErr('Could not find a user for the provided user id to update.',404));
-        
-    updateNote.title = title;
-    updateNote.type = type;
-    updateNote.srcTypeId = srcTypeId;
+    let noteData = await Note.findOneAndReplace(
+        {
+            _id: noteId,
+        },
+        {
+            ...req.body,
+            _id: noteId,
+        }
+    );
 
-    if(srcName)
-        updateNote.srcName = srcName;
-    else
-        delete updateNote.srcName;
-     
-    if(srcURL)
-        updateNote.srcURL = srcName;
-    else
-        delete updateNote.srcURL;
+    // noteData = noteData.toObject();
 
-    updateNote.note = note;
+    console.log('noteData 1',noteData);
 
-    DUMMY_NOTES[scopeIndex] = updateNote;
+    // noteData.title = title;
+    // noteData.type = type;
+    // noteData.srcTypeId = srcTypeId;
+    // noteData.title = title;
 
-    res.status(200).json(updateNote);
+    console.log('params',title,type,srcTypeId,srcName,srcURL,note);
+
+    // if(srcName)
+    //     noteData.name = srcName;
+    // else 
+    //     noteData.name = undefined;
+
+    // if(srcURL)
+    //     noteData.srcURL = srcURL;
+    // else 
+    //     noteData.srcURL = undefined;
+
+    // noteData.note = note;
+
+    // await noteData.save();
+
+    console.log('noteData 2',noteData);
+
+    res.status(200).json(noteData);
 }
 
 const delNote = async (req,res,next)=>{
