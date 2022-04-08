@@ -28,7 +28,6 @@ const getNotes = async (req,res,next)=>{
 }
 
 const updateNote = async (req,res,next)=>{
-    const {title,type,srcTypeId,srcName,srcURL,note} = req.body;
     const noteId = req.body._id;
 
     let noteData = await Note.findOneAndReplace(
@@ -40,33 +39,6 @@ const updateNote = async (req,res,next)=>{
             _id: noteId,
         }
     );
-
-    // noteData = noteData.toObject();
-
-    console.log('noteData 1',noteData);
-
-    // noteData.title = title;
-    // noteData.type = type;
-    // noteData.srcTypeId = srcTypeId;
-    // noteData.title = title;
-
-    console.log('params',title,type,srcTypeId,srcName,srcURL,note);
-
-    // if(srcName)
-    //     noteData.name = srcName;
-    // else 
-    //     noteData.name = undefined;
-
-    // if(srcURL)
-    //     noteData.srcURL = srcURL;
-    // else 
-    //     noteData.srcURL = undefined;
-
-    // noteData.note = note;
-
-    // await noteData.save();
-
-    console.log('noteData 2',noteData);
 
     res.status(200).json(noteData);
 }
