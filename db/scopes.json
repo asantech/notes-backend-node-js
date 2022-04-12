@@ -11,3 +11,4 @@
 {"_id":{"$oid":"623f6768a4d95af605d785ea"},"name":"github","__v":{"$numberInt":"0"}}
 {"_id":{"$oid":"623f758ca4d95af605d78609"},"name":"CKEditor 5","__v":{"$numberInt":"0"}}
 {"_id":{"$oid":"624029f3bb69510fff83e7c5"},"name":"Design Patterns","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"62481e653716f2338f10dfa8"},"name":"debugging","desc":"<p>The definition of debugging &amp; how to debug your code in different environments &amp; scenarios.</p>","__v":{"$numberInt":"0"}}
